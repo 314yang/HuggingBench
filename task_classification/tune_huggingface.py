@@ -1,16 +1,13 @@
-from sklearn.preprocessing import StandardScaler
+import torch
 from cogdl.data import Graph
 from cogdl.datasets import NodeDataset, generate_random_graph
 from cogdl.experiments import experiment
-from cogdl.utils import MultiLabelMicroF1, BCEWithLogitsLoss
-import torch
+from cogdl.utils import BCEWithLogitsLoss, MultiLabelMicroF1
+from sklearn.preprocessing import StandardScaler
 
 prefix = './data/'
-# paths = ['huggingface.pt', 'huggingface_bert.pt', 'huggingface_bert_ft.pt', 'huggingface_bge.pt', 'huggingface_bge_ft.pt']
 paths = ['huggingface.pt']
-# models = ['gcn', 'grand', 'ppnp', 'revgcn', 'gcnii', 'graphsaint']
-models = ['gat', 'revgat']
-# models = ["gtn", "han", "pte"]
+models = ['gcn']
 
 class HuggingfaceNodeDataset(NodeDataset):
     def __init__(self, path):
@@ -36,6 +33,4 @@ if __name__ == "__main__":
     for path in paths:
         dataset = HuggingfaceNodeDataset(path=prefix + path)
         datasets.append(dataset)
-    # experiment(dataset=datasets, model='ppnp', num_layers=3)
-    # experiment(dataset=datasets, model='graphsaint', num_layers=3)
     experiment(dataset=datasets, model=models, devices=[0], seed=[0,1,2], search_space=search_space)

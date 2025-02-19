@@ -4,10 +4,10 @@ Code for paper "Benchmarking Recommendation, Classification, and Tracing Based o
 
 ## Data
 
-The data of $\mathsf{HuggingKG}$ and $\mathsf{HuggingBench}$ is available on [Hugging Face](https://huggingface.co/collections/cqsss/huggingbench-67b2ee02ca45b15e351009a2).
+The data of **HuggingKG** and **HuggingBench** is available on [Hugging Face](https://huggingface.co/collections/cqsss/huggingbench-67b2ee02ca45b15e351009a2).
 
-- [$\mathsf{HuggingKG}$](https://huggingface.co/datasets/cqsss/HuggingKG)
-- $\mathsf{HuggingBench}$
+- [HuggingKG](https://huggingface.co/datasets/cqsss/HuggingKG)
+- HuggingBench
     - [Resource Recommendation](https://huggingface.co/datasets/cqsss/HuggingBench-Recommendation)
     - [Task Classification](https://huggingface.co/datasets/cqsss/HuggingBench-Classification)
     - [Model Tracing](https://huggingface.co/datasets/cqsss/HuggingBench-Tracing)
@@ -17,6 +17,7 @@ The data of $\mathsf{HuggingKG}$ and $\mathsf{HuggingBench}$ is available on [Hu
 
 #### Resource Recommendation
 
+We use [SSLRec](https://github.com/HKUDS/SSLRec) to implemen baselines for resource recommendation.
 
 
 - **General Collaborative Filtering**
@@ -63,6 +64,8 @@ The data of $\mathsf{HuggingKG}$ and $\mathsf{HuggingBench}$ is available on [Hu
 #### Task Classification
 
 
+We use [CogDL](https://github.com/THUDM/CogDL) to implemen baselines for task classification.
+
 |            | binary  | BERT    | BERT (ft) | BGE     | BGE (ft)  |
 |------------|---------|---------|---------|---------|---------|
 | GCN        | 0.0662  | 0.7620  | 0.8291  | 0.7411  | 0.8522  |
@@ -77,6 +80,8 @@ The data of $\mathsf{HuggingKG}$ and $\mathsf{HuggingBench}$ is available on [Hu
 
 
 #### Model Tracing
+
+We use [LibKGE](https://github.com/uma-pi1/kge) to implemen baselines for supervised biselines and use the official code of [ULTRA](https://github.com/DeepGraphLearning/ULTRA) and [KG-ICL](https://github.com/nju-websoft/KG-ICL) of the two unsupervised models.
 
 |          | MRR     | HIT@1   | HIT@3   | HIT@5   | HIT@10  |
 |----------|---------|---------|---------|---------|---------|
