@@ -4,20 +4,43 @@ Code for paper "Benchmarking Recommendation, Classification, and Tracing Based o
 
 ## Data
 
-The data of $\mathsf{HuggingKG}$ and $\mathsf{HuggingBench}$ is available on [Hugging Face](https://huggingface.co/collections/cqsss/huggingbench-67b2ee02ca45b15e351009a2).
+The data of **HuggingKG** and **HuggingBench** is available on [Hugging Face](https://huggingface.co/collections/cqsss/huggingbench-67b2ee02ca45b15e351009a2).
 
-- [$\mathsf{HuggingKG}$](https://huggingface.co/datasets/cqsss/HuggingKG)
-- $\mathsf{HuggingBench}$
+- [HuggingKG](https://huggingface.co/datasets/cqsss/HuggingKG)
+    - `triples.txt` contains the triple information of the complete graph, in the following form.
+    ```
+    JeffreyXiang/TRELLIS	space_use_model	JeffreyXiang/TRELLIS-image-large
+    black-forest-labs/FLUX.1-dev	space_use_model	black-forest-labs/FLUX.1-dev
+    black-forest-labs/FLUX.1-dev	space_use_model	madebyollin/taef1
+    Changg/ori	model_definedFor_task	text-to-image
+    DmitryYarov/aristotle_based_on_rugpt3large_based_on_gpt	model_definedFor_task	text-generation
+    JINJIN7987/llama3-8b-neg-sleeper	model_definedFor_task	text-generation
+    ShuhongZheng/sdxl_cat2_w_preserve	model_definedFor_task	text-to-image
+    ...
+    ```
+    - `HuggingKG_V20241215174821.zip` contains `json` files of various nodes and edges. Each `json` file is a list of `dict`, where each element consists of attributes of a node/edge.
+
+- HuggingBench
     - [Resource Recommendation](https://huggingface.co/datasets/cqsss/HuggingBench-Recommendation)
+        - `general_rec` contains training/validation/test set files for the *General Collaborative Filtering* methods in the format required by [SSLRec](https://github.com/HKUDS/SSLRec).
+        - `social_rec` contains training/validation/test set files and user social relation file for the *Social Recommendation* methods in the format required by [SSLRec](https://github.com/HKUDS/SSLRec).
+        - `ke_rec_xxx` contains training/validation/test set files and external KG files for the *Social Recommendation* methods in the format required by [SSLRec](https://github.com/HKUDS/SSLRec). `xxx` indicates the type of external KG from HuggingKG.
     - [Task Classification](https://huggingface.co/datasets/cqsss/HuggingBench-Classification)
+        - `classification.zip` contains training/validation/test set files and task-to-id file for multi-label classification.
+        - `huggingface_xxx.pt` is graph data file in the format required by [CogDL](https://github.com/THUDM/CogDL). `xxx` indicates the type of node feature initialization.
     - [Model Tracing](https://huggingface.co/datasets/cqsss/HuggingBench-Tracing)
+        - `training/validation/test.txt` are training/validation/test set files in the format required by [LibKGE](https://github.com/uma-pi1/kge).
 
 
-### Experiments
+## Experiments
 
-#### Resource Recommendation
+### Resource Recommendation
 
-
+We use [SSLRec](https://github.com/HKUDS/SSLRec) to implemen baselines for resource recommendation. 
+- Clone [SSLRec](https://github.com/HKUDS/SSLRec) and configure required environment.
+- Download data in [HuggingBench-Recommendation](https://huggingface.co/datasets/cqsss/HuggingBench-Recommendation) to `SSLRec/datasets` of SSLRec.
+- Copy configuration files in `./resource_recommendation/SSLRec/config` and `./resource_recommendation/SSLRec/data_utils`. 
+- Run shell scripts in `./resource_recommendation/SSLRec/scripts`.
 
 - **General Collaborative Filtering**
 
@@ -60,8 +83,16 @@ The data of $\mathsf{HuggingKG}$ and $\mathsf{HuggingBench}$ is available on [Hu
 
 
 
-#### Task Classification
+### Task Classification
 
+
+We use [CogDL](https://github.com/THUDM/CogDL) to implemen baselines for task classification.
+- Install [CogDL](https://github.com/THUDM/CogDL).
+```
+pip install cogdl
+```
+- Download data in [HuggingBench-Classification](https://huggingface.co/datasets/cqsss/HuggingBench-Classification) to `task_classification/data/`.
+- Run `./task_classification/tune_huggingface.py`.
 
 |            | binary  | BERT    | BERT (ft) | BGE     | BGE (ft)  |
 |------------|---------|---------|---------|---------|---------|
@@ -76,7 +107,14 @@ The data of $\mathsf{HuggingKG}$ and $\mathsf{HuggingBench}$ is available on [Hu
 | RevGAT     | 0.0335  | 0.7412  | 0.8849  | 0.7569  | 0.8716  |
 
 
-#### Model Tracing
+### Model Tracing
+
+We use [LibKGE](https://github.com/uma-pi1/kge) to implemen baselines for supervised biselines and use the official code of [ULTRA](https://github.com/DeepGraphLearning/ULTRA) and [KG-ICL](https://github.com/nju-websoft/KG-ICL) of the two unsupervised models.
+
+- Clone [LibKGE](https://github.com/uma-pi1/kge) and configure required environment.
+- Download data in [HuggingBench-Tracing](https://huggingface.co/datasets/cqsss/HuggingBench-Tracing) to `kge/data/huggingface`.
+- Copy configuration files in `./model_tracing/kge/examples`.
+- Run train/test shell scripts `model_tracing\kge\scripts\train.sh` and `model_tracing\kge\scripts\test.sh`.
 
 |          | MRR     | HIT@1   | HIT@3   | HIT@5   | HIT@10  |
 |----------|---------|---------|---------|---------|---------|
