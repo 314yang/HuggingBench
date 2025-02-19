@@ -75,7 +75,7 @@ The current version of HuggingKG is available on [Hugging Face](https://huggingf
 | organization | publish                  | dataset      | 64300   |
 | organization | publish                  | space        | 12956   |
 | organization | own                      | collection   | 5453    |
-| (all)        | 6246353                  |              |         |
+|              | (all)                    |              | 6246353 |
 
 ## Building the Knowledge Graph
 
@@ -101,21 +101,21 @@ Each type of entity and relationship is saved separately, along with auxiliary d
 | User         | 'author' found in Model data, Dataset data, Space data and Paper data, <br />'owner' found in Collection data, <br />`/users/{user.id}/overview` for details |                                             |
 | Organization | 'author' found in Model data, Dataset data and Space data, <br />'owner' found in Collection data, <br />`/api/organizations/{organization.id}/overview` for details |                                             |
 
-| Relations                                         | Sources/Methods                                           | Notes |
-| ------------------------------------------------- | --------------------------------------------------------- | ----- |
-| Model - Defined For - Task                        | 'pipeline_tag:' tag found in Model data                   |       |
-| Model - Adapter/Finetune/Merge/Quantize - Model   | 'base_model:' tag found in Model data                     |       |
-| Model - Trained Or Finetuned On - Dataset         | 'dataset:' tag found in Model data                        |       |
-| Model/Dataset - Cite - Paper                      | 'arxiv:' tag found in Model data and Dataset data         |       |
-| Dataset - Defined For - Task                      | 'task_categories' tag found in Dataset data               |       |
-| Space - Use - Model/Dataset                       | 'models' and 'datasets' found in Space data               |       |
-| Collection - Contain - Model/Dataset/Space/Paper  | 'items' found in Collection data                          |       |
-| User/Organization - Publish - Model/Dataset/Space | 'author' found in Model data, Dataset data and Space data |       |
-| User - Publish - Paper                            | 'authors' found in Paper Data                             |       |
-| User/Organization - Own - Collection              | 'owner' found in Collection data                          |       |
-| User - Like - Model/Dataset/Space                 | `/api/{repo_type}s/{repo_id}/likers`                      |       |
-| User - Follow - User/Organization                 | `/api/users/{user_id}/followers`                          |       |
-| User - Affiliated With - Organization             | `/api/organizations/{org_id}/members`                     |       |
+| Relations                                         | Sources/Methods                                              | Notes |
+| ------------------------------------------------- | ------------------------------------------------------------ | ----- |
+| Model - Defined For - Task                        | 'pipeline_tag:' tag found in Model data                      |       |
+| Model - Adapter/Finetune/Merge/Quantize - Model   | 'base_model:' tag found in Model data                        |       |
+| Model - Trained Or Finetuned On - Dataset         | 'dataset:' tag found in Model data                           |       |
+| Model/Dataset - Cite - Paper                      | 'arxiv:' tag found in Model data and Dataset data            |       |
+| Dataset - Defined For - Task                      | 'task_categories' tag found in Dataset data                  |       |
+| Space - Use - Model/Dataset                       | 'models' and 'datasets' found in Space data                  |       |
+| Collection - Contain - Model/Dataset/Space/Paper  | 'items' found in Collection data                             |       |
+| User/Organization - Publish - Model/Dataset/Space | 'author' found in Model data, Dataset data and Space data    |       |
+| User - Publish - Paper                            | 'authors' found in Paper Data                                |       |
+| User/Organization - Own - Collection              | 'owner' found in Collection data                             |       |
+| User - Like - Model/Dataset/Space                 | `/api/{repo_type}s/{repo_id}/likers`                         |       |
+| User - Follow - User/Organization                 | `/api/users/{user_id}/followers`                             |       |
+| User - Affiliated With - Organization             | `/api/organizations/{org_id}/members`, <br />`/api/organizations/{org_id}/followers` |       |
 
 ### Data Verification and Cleaning
 
