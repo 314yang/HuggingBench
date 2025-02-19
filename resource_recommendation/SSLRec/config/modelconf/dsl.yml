@@ -1,0 +1,47 @@
+optimizer:
+  name: adam
+  lr: 1.0e-3
+  weight_decay: 0.0
+
+train:
+  epoch: 100
+  batch_size: 4096
+  s_batch: 2048
+  save_model: true
+  log_loss: true
+  loss: pairwise # bpr
+  test_step: 3 # evaluate per {test_step} epochs
+  patience: 5
+  #pretrain_path: ./checkpoint/xxxx.pth
+  reproducible: true
+  seed: 42
+  tensorboard: true
+  early_stop: true
+  
+
+test:
+  metrics: [mrr, recall, ndcg]
+  k: [5, 10, 20, 40]
+  batch_size: 4096
+
+data:
+  type: social # choose in {general_cf, multi_behavior, sequential, social}
+  name: huggingface
+
+model:
+  name: dsl # case-insensitive
+  embedding_size: 64
+  gnn_layer: 2
+  uugnn_layer: 2
+  dropout_rate: 0.5
+  leaky: 0.5
+  reg_weight: 1.0e-3
+  soc_weight: 1.0e-3
+  sal_weight: 1.0e-3
+
+tune:
+  enable: true
+  hyperparameters: [lr, gnn_layer]
+  lr: [1.0e-3, 1.0e-4, 1.0e-5]
+  gnn_layer: [2, 3]
+

@@ -1,0 +1,46 @@
+optimizer:
+  name: adam
+  lr: 1.0e-4 # not 1e-3
+  weight_decay: 0
+
+train:
+  trainer: trainer
+  epoch: 100
+  batch_size: 4096
+  save_model: true
+  loss: pairwise # bpr
+  test_step: 3 # evaluate per {test_step} epochs
+  patience: 5
+  # pretrain_path: checkpoint/kgrec/kgrec-last-fm-1689594554.pth
+  reproducible: true
+  seed: 42
+
+test:
+  metrics: [mrr, recall, ndcg]
+  k: [5, 10, 20, 40]
+  batch_size: 1024
+  eval_at_one_forward: true
+
+data:
+  type: kg # choose in {general_cf, multi_behavior, sequential, social, kg}
+  name: huggingface
+
+model:
+  name: kgin # case-insensitive
+  layer_num: 2
+  decay_weight: 1.0e-5
+  embedding_size: 64
+  node_dropout: true
+  node_dropout_rate: 0.5
+  mess_dropout: true
+  mess_dropout_rate: 0.1
+
+  n_factors: 4
+  ind: distance
+  sim_regularity: 1.0e-4
+
+tune:
+  enable: true
+  hyperparameters: [lr, layer_num]
+  lr: [1.0e-3]
+  layer_num: [2, 3]

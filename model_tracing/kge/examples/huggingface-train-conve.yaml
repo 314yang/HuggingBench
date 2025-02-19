@@ -1,0 +1,35 @@
+job.type: search
+dataset.name: huggingface
+
+entity_ranking:
+    metrics_per:
+        head_and_tail: true
+
+model: reciprocal_relations_model
+reciprocal_relations_model.base_model.type: conve
+
+train:
+    optimizer.default:
+        type: AdamW
+    lr_scheduler: ReduceLROnPlateau
+    batch_size: 256
+    max_epochs: 100
+    loss: bce
+lookup_embedder:
+    dim: 64
+    initialize: xavier_normal_
+
+conve:
+    round_dim: True
+    entity_embedder.dropout: 0.2
+    relation_embedder.dropout: 0.2
+
+valid:
+    early_stopping:
+        patience: 5
+    every: 3
+    metric: mean_reciprocal_rank_filtered_head
+    
+search.type: grid
+grid_search.parameters:
+    train.optimizer.default.args.lr: [ 0.01, 0.001, 0.0001, 0.00001 ]
