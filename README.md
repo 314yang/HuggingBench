@@ -32,9 +32,9 @@ The data of **HuggingKG** and **HuggingBench** is available on [Hugging Face](ht
         - `training/validation/test.txt` are training/validation/test set files in the format required by [LibKGE](https://github.com/uma-pi1/kge).
 
 
-### Experiments
+## Experiments
 
-#### Resource Recommendation
+### Resource Recommendation
 
 We use [SSLRec](https://github.com/HKUDS/SSLRec) to implemen baselines for resource recommendation. 
 - Clone [SSLRec](https://github.com/HKUDS/SSLRec) and configure required environment.
@@ -83,7 +83,7 @@ We use [SSLRec](https://github.com/HKUDS/SSLRec) to implemen baselines for resou
 
 
 
-#### Task Classification
+### Task Classification
 
 
 We use [CogDL](https://github.com/THUDM/CogDL) to implemen baselines for task classification.
@@ -107,7 +107,7 @@ pip install cogdl
 | RevGAT     | 0.0335  | 0.7412  | 0.8849  | 0.7569  | 0.8716  |
 
 
-#### Model Tracing
+### Model Tracing
 
 We use [LibKGE](https://github.com/uma-pi1/kge) to implemen baselines for supervised biselines and use the official code of [ULTRA](https://github.com/DeepGraphLearning/ULTRA) and [KG-ICL](https://github.com/nju-websoft/KG-ICL) of the two unsupervised models.
 
