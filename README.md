@@ -31,6 +31,16 @@ The data of **HuggingKG** and **HuggingBench** is available on [Hugging Face](ht
     - [Model Tracing](https://huggingface.co/datasets/cqsss/HuggingBench-Tracing)
         - `training/validation/test.txt` are training/validation/test set files in the format required by [LibKGE](https://github.com/uma-pi1/kge).
 
+## HuggingKG
+
+HuggingKG is a comprehensive knowledge graph constructed from Hugging Face, capturing rich connections between models, datasets, papers, users, and other resources.
+
+The code for constructing HuggingKG is available in the [HuggingKG](HuggingKG) directory, including:
+- `HuggingKG_constructor.py`: The main script for crawling data and building the knowledge graph
+- `requirements.txt`: Required Python packages for running the constructor
+- `README.md`: Detailed documentation about the construction process and statistics
+
+For detailed information about the construction process and statistics of HuggingKG, please refer to the [HuggingKG/README.md](HuggingKG/README.md).
 
 ## Experiments
 
