@@ -1,6 +1,6 @@
 # HuggingBench
 
-![](figs\huggingkg.jpg)
+![](./figs/huggingkg.jpg)
 
 Code for paper "Benchmarking Recommendation, Classification, and Tracing Based on Hugging Face Knowledge Graph".
 
