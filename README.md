@@ -26,7 +26,7 @@ The data of **HuggingKG** and **HuggingBench** is available on [Hugging Face](ht
     - [Resource Recommendation](https://huggingface.co/datasets/cqsss/HuggingBench-Recommendation)
         - `general_rec` contains training/validation/test set files for the *General Collaborative Filtering* methods in the format required by [SSLRec](https://github.com/HKUDS/SSLRec).
         - `social_rec` contains training/validation/test set files and user social relation file for the *Social Recommendation* methods in the format required by [SSLRec](https://github.com/HKUDS/SSLRec).
-        - `ke_rec_xxx` contains training/validation/test set files and external KG files for the *Social Recommendation* methods in the format required by [SSLRec](https://github.com/HKUDS/SSLRec). `xxx` indicates the type of external KG from HuggingKG.
+        - `ke_rec_xxx` contains training/validation/test set files and external KG files for the *Knowledge Graph-enhanced Recommendation* methods in the format required by [SSLRec](https://github.com/HKUDS/SSLRec). `xxx` indicates the type of external KG from HuggingKG.
     - [Task Classification](https://huggingface.co/datasets/cqsss/HuggingBench-Classification)
         - `classification.zip` contains training/validation/test set files and task-to-id file for multi-label classification.
         - `huggingface_xxx.pt` is graph data file in the format required by [CogDL](https://github.com/THUDM/CogDL). `xxx` indicates the type of node feature initialization.
