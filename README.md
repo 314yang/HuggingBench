@@ -11,7 +11,7 @@
     <img alt="HF Dataset" src="https://img.shields.io/badge/HF%20Dataset-HuggingBench-FFD21F?logo=huggingface">
   </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-  <a href="https://sigir.org/sigir2025/">
+  <a href="https://sigir2025.dei.unipd.it/">
     <img alt="SIGIR 2025" src="https://img.shields.io/badge/Accepted%20at-SIGIR%202025-9a1f63.svg?logo=semantic-release">
   </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
