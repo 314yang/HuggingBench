@@ -1,16 +1,34 @@
-# Benchmarking Recommendation, Classification, and Tracing Based on Hugging Face Knowledge Graph
+<h1 align="center">
+    Benchmarking Recommendation, Classification, and Tracing Based on Hugging Face Knowledge Graph
+</h1>
+
+<p align="center">
+  <a href='https://arxiv.org/abs/2505.17507'>
+    <img src='https://img.shields.io/badge/arXiv-2505.17507-b31b1b.svg'>
+  </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+  <a href="https://huggingface.co/collections/cqsss/huggingbench-67b2ee02ca45b15e351009a2">
+    <img alt="HF Dataset" src="https://img.shields.io/badge/HF%20Dataset-HuggingBench-FFD21F?logo=huggingface">
+  </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+  <a href="https://sigir.org/sigir2025/">
+    <img alt="SIGIR 2025" src="https://img.shields.io/badge/Accepted%20at-SIGIR%202025-9a1f63.svg?logo=semantic-release">
+  </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+  <a href="https://opensource.org/license/apache-2-0">
+    <img alt="Apache 2.0 License" src="https://img.shields.io/badge/License-Apache_2.0-4285f4.svg?logo=apache">
+  </a>
+</p>
 
 ![HuggingKG Diagram](./figs/huggingkg.jpg)
 
 This repository provides the code and data for the paper **"Benchmarking Recommendation, Classification, and Tracing Based on Hugging Face Knowledge Graph"**.
 
----
 
 ## 📰 News
 
 [2025-04-05] Our resource paper on HuggingKG and HuggingBench has been accepted at **SIGIR 2025**! 🎉🎉🎉
 
----
 
 ## 🔗 Data
 
@@ -49,7 +67,6 @@ ShuhongZheng/sdxl_cat2_w_preserve	model_definedFor_task	text-to-image
 
 - `training.txt`, `validation.txt`, `test.txt`: Formatted for [LibKGE](https://github.com/uma-pi1/kge)
 
----
 
 ## 🧾 HuggingKG Construction
 
@@ -62,7 +79,6 @@ The code for constructing HuggingKG is available in the [HuggingKG](HuggingKG) d
 
 For detailed information about the construction process and statistics of HuggingKG, please refer to the [HuggingKG/README.md](HuggingKG/README.md).
 
----
 
 ## 🧪 Experiments
 
@@ -160,7 +176,6 @@ Implemented using [LibKGE](https://github.com/uma-pi1/kge) for supervised biseli
 | ULTRA    | 0.3373  | 0.1440  | 0.4803  | 0.5309  | 0.6672  |
 | KG-ICL   | 0.4008  | 0.3354  | 0.3792  | 0.4854  | 0.5938  |
 
----
 
 ## 📄 Citation
 
