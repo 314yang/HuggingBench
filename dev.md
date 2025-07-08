@@ -906,18 +906,13 @@ NDCG（Normalized Discounted Cumulative Gain）是推荐系统中常用的排序
 
 # 任务分类 CogDL
 
-**图深度学习任务分类对比表**
-| **任务类型**       | **核心问题**                                                                 | **技术特点**                                                                 | **典型应用场景**                                                                 | **CogDL支持模型**                                                          |
-|--------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------------|----------------------------------------------------------------------------------|----------------------------------------------------------------------------|
-| **节点分类**       | 关注个体属性（如用户兴趣）。<br>通过为图中每个节点分配类别标签。                                                 | - 输入：图结构+节点特征（可选）<br>- 输出：节点标签。节点局部结构信息<br>- 模型：GCN、GAT、GraphSAGE | - 社交网络用户分组<br>- 知识图谱实体分类<br>- 欺诈检测<br>- 蛋白质功能预测         | `gcn`, `gat`, `graphsage`, `sgc`, `appnp`                                  |
-| **图分类**         | 关注整体属性（如分子毒性）。<br>通过为整个图分配类别标签。                                                       | - 输入：多个独立图（节点数/边数可变）<br>- 输出：图标签。提取整个图的全局特征<br>- 模型：GIN、GraphIsomorphismNetwork | - 化学分子毒性预测<br>- 脑网络疾病诊断<br>- 社交网络社区类型识别<br>- 图像分类       | `gin`, `diffpool`, `graphsage`, `gcn`, `graph-isomorphism`                |
-| **链接预测**       | 预测关注关系（如好友推荐）。<br>通过预测节点间是否存在潜在链接。                                                 | - 输入：图结构+节点特征（可选）<br>- 输出：节点对链接概率。建模节点对之间的交互<br>- 模型：GAE、VGAE、Node2Vec | - 社交网络好友推荐<br>- 知识图谱补全<br>- 推荐系统商品推荐<br>- 蛋白质相互作用预测   | `prone`, `node2vec`, `deepwalk`, `struc2vec`, `gae`, `vgae`               |
-| **图生成**         | 生成符合特定规则的新图（如分子结构）。                                       | - 输入：图分布或条件<br>- 输出：新图结构<br>- 模型：GraphVAE、GraphRNN               | - 药物分子设计<br>- 材料科学<br>- 社交网络模拟                                   | `graphvae`, `graphrnn`, `graphgan`                                        |
-| **节点聚类**       | 将节点分组到不同社区（无监督），如社区发现                                           | - 输入：图结构+节点特征（可选）<br>- 输出：节点聚类结果<br>- 模型：DeepWalk、Node2Vec | - 社交网络社区发现<br>- 推荐系统用户分群<br>- 图像分割                             | `deepwalk`, `node2vec`, `struc2vec`, `line`, `hope`                       |
-| **图表示学习**     | 将图结构和节点特征编码为低维向量。                                           | - 输入：图结构+节点特征<br>- 输出：节点/图嵌入向量<br>- 模型：Graph2Vec、GNN          | - 图数据降维<br>- 作为其他任务的预处理步骤                                      | `graph2vec`, `gcn`, `gat`, `graphsage`, `gin`                             |
+## 图神经网络
 
+（Graph Neural Networks, GNNs）是一类专门用于处理图结构数据的神经网络模型。
 
-## 读图
+### 图数据结构
+
+图是由节点（顶点）和连接节点的边组成的一种数据结构，可表示为 $G=(V, E)$，其中 $V$ 是节点集合，$E$ 是边集合。
 
 节点表 + 边表
 **节点表（nodes.csv）**：
@@ -963,3 +958,117 @@ graph = Graph(x=x, edge_index=edge_index, y=y)
 if edge_weight is not None:
     graph.edge_weight = edge_weight
 ```
+## 图任务分类
+**图深度学习任务分类对比表**
+| **任务类型**       | **核心问题**                                                                 | **技术特点**                                                                 | **典型应用场景**                                                                 | **CogDL支持模型**                                                          |
+|--------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------------|----------------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| **节点分类**       | 关注个体属性（如用户兴趣）。<br>通过为图中每个节点分配类别标签。                                                 | - 输入：图结构+节点特征（可选）<br>- 输出：节点标签。节点局部结构信息<br>- 模型：GCN、GAT、GraphSAGE | - 社交网络用户分组，将用户分为不同的兴趣群体；<br>- 知识图谱实体分类<br>- 欺诈检测<br>- 预测蛋白质的功能类别         | `gcn`, `gat`, `graphsage`, `sgc`, `appnp`                                  |
+| **图分类**         | 关注整体属性（如分子毒性）。<br>通过为整个图分配类别标签。                                                       | - 输入：多个独立图（节点数/边数可变）<br>- 输出：图标签。提取整个图的全局特征<br>- 模型：GIN、GraphIsomorphismNetwork | - 化学分子生物活性（如，毒性）预测<br>- 脑网络疾病诊断<br>- 判断一个社交圈子是否属于特定的组织类型<br>- 图像分类       | `gin`, `diffpool`, `graphsage`, `gcn`, `graph-isomorphism`                |
+| **链接预测**       | 预测关注关系（如好友推荐）。<br>预测图中两个节点之间是否存在边，或者边的权重。                                                 | - 输入：图结构+节点特征（可选）<br>- 输出：节点对链接概率。建模节点对之间的交互<br>- 模型：GAE、VGAE、Node2Vec | - 社交网络好友推荐，预测两个用户是否会成为朋友<br>- 知识图谱补全，预测实体之间是否存在某种关系<br>- 推荐系统商品推荐<br>- 蛋白质相互作用预测   | `prone`, `node2vec`, `deepwalk`, `struc2vec`, `gae`, `vgae`               |
+| **图生成**         | 生成符合特定规则的新图（如分子结构）。                                       | - 输入：图分布或条件<br>- 输出：新图结构<br>- 模型：GraphVAE、GraphRNN               | - 在化学领域，生成具有特定性质的分子图；<br>在社交网络中，模拟社交网络的演化过程。                              | `graphvae`, `graphrnn`, `graphgan`                                        |
+| **节点聚类**       | 将节点分组到不同社区（无监督），如社区发现                                           | - 输入：图结构+节点特征（可选）<br>- 输出：节点聚类结果<br>- 模型：DeepWalk、Node2Vec | - 社交网络社区发现<br>- 推荐系统用户分群<br>- 图像分割                             | `deepwalk`, `node2vec`, `struc2vec`, `line`, `hope`                       |
+| **图表示学习**     | 将图结构和节点特征编码为低维向量。                                           | - 输入：图结构+节点特征<br>- 输出：节点/图嵌入向量<br>- 模型：Graph2Vec、GNN          | - 图数据降维<br>- 作为其他任务的预处理步骤                                      | `graph2vec`, `gcn`, `gat`, `graphsage`, `gin`                             |
+
+## 实现
+
+1. 消息传递机制
+消息传递机制是图神经网络的核心，它通过迭代的方式，让节点不断聚合其邻居节点的信息，更新自身的特征表示，从而学习到**节点的特征**表示和**图的全局结构**信息。。具体步骤如下：
+- **消息生成**：每个节点根据自身的特征和邻居节点的特征，生成消息。
+- **消息聚合**：节点将其邻居节点生成的消息进行聚合，得到聚合消息。常见的聚合方法包括求和、求平均、最大值等。
+- **节点更新**：节点根据自身的特征和聚合消息，更新自身的特征表示。
+
+以图卷积网络（Graph Convolutional Network, GCN）为例，其消息传递公式为：
+$$H^{(l+1)} = \sigma(\tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}H^{(l)}W^{(l)})$$
+其中，$H^{(l)}$ 是第 $l$ 层的节点特征矩阵，$\tilde{A}=A + I$ 是邻接矩阵加上自环，$\tilde{D}$ 是 $\tilde{A}$ 的度矩阵，$W^{(l)}$ 是第 $l$ 层的可学习权重矩阵，$\sigma$ 是激活函数。
+
+消息传递过程分析
+- **$\tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}$**：这部分是对邻接矩阵进行归一化处理，得到归一化的邻接矩阵。归一化后的邻接矩阵可以确保在消息聚合过程中，每个节点的邻居节点的信息能够被合理地加权。
+- **$\tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}H^{(l)}$**：这一步实现了消息聚合的过程。节点会根据归一化的邻接矩阵，将邻居节点的特征进行加权求和，得到聚合消息。
+- **$\tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}H^{(l)}W^{(l)}$**：这一步将聚合消息与可学习的权重矩阵相乘，实现了节点更新的线性变换部分。
+- **$\sigma(\tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}H^{(l)}W^{(l)})$**：最后，通过激活函数对线性变换的结果进行处理，引入非线性因素，得到第 $l+1$ 层的节点特征矩阵。
+
+
+2. 损失函数设计
+根据不同的问题域，设计相应的损失函数来衡量模型的预测结果与真实标签之间的差异。
+
+- **节点分类**：通常使用交叉熵损失函数，如：
+$$L = -\frac{1}{N}\sum_{i=1}^{N}\sum_{c=1}^{C}y_{i,c}\log(p_{i,c})$$
+其中，$N$ 是节点数量，$C$ 是类别数量，$y_{i,c}$ 是节点 $i$ 属于类别 $c$ 的真实标签，$p_{i,c}$ 是节点 $i$ 属于类别 $c$ 的预测概率。
+- **图分类**：同样可以使用交叉熵损失函数，或者根据具体问题选择其他合适的损失函数。
+- **链接预测**：常用的损失函数包括二元交叉熵损失函数、负采样损失函数等。例如，负采样损失函数为：
+$$L = -\frac{1}{|E|}\sum_{(u, v)\in E}\log(\sigma(\mathbf{z}_u^T\mathbf{z}_v)) - \frac{1}{|E|}\sum_{(u, v)\notin E}\log(1 - \sigma(\mathbf{z}_u^T\mathbf{z}_v))$$
+其中，$E$ 是边集合，$\mathbf{z}_u$ 和 $\mathbf{z}_v$ 分别是节点 $u$ 和 $v$ 的特征向量，$\sigma$ 是 sigmoid 函数。
+
+3. 优化算法
+使用优化算法来最小化损失函数，更新模型的参数。常用的优化算法包括随机梯度下降（SGD）、Adam、Adagrad 等。以 Adam 算法为例，其更新公式为：
+$$\theta_{t+1} = \theta_t - \frac{\alpha}{\sqrt{\hat{v}_t}+\epsilon}\hat{m}_t$$
+其中，$\theta_t$ 是第 $t$ 步的参数，$\alpha$ 是学习率，$\hat{m}_t$ 和 $\hat{v}_t$ 分别是一阶矩估计和二阶矩估计的偏差修正版本，$\epsilon$ 是一个小的常数，用于防止除零错误。
+
+代码示例，PyTorch Geometric 库实现一个简单的图卷积网络进行节点分类
+
+```python
+import torch
+import torch.nn.functional as F
+from torch_geometric.nn import GCNConv
+from torch_geometric.datasets import Planetoid
+import torch_geometric.transforms as T
+
+
+# 加载数据集
+dataset = Planetoid(root='data/Planetoid', name='Cora', transform=T.NormalizeFeatures())
+data = dataset[0]
+
+
+# 定义图卷积网络模型
+class GCN(torch.nn.Module):
+    def __init__(self, in_channels, hidden_channels, out_channels):
+        super(GCN, self).__init__()
+        self.conv1 = GCNConv(in_channels, hidden_channels)
+        self.conv2 = GCNConv(hidden_channels, out_channels)
+
+
+    def forward(self, x, edge_index):
+        x = self.conv1(x, edge_index)
+        x = F.relu(x)
+        x = F.dropout(x, training=self.training)
+        x = self.conv2(x, edge_index)
+        return F.log_softmax(x, dim=1)
+
+
+# 初始化模型、优化器和损失函数
+model = GCN(dataset.num_node_features, 16, dataset.num_classes)
+optimizer = torch.optim.Adam(model.parameters(), lr=0.01, weight_decay=5e-4)
+criterion = torch.nn.NLLLoss()
+
+
+# 训练模型
+def train():
+    model.train()
+    optimizer.zero_grad()
+    out = model(data.x, data.edge_index)
+    loss = criterion(out[data.train_mask], data.y[data.train_mask])
+    loss.backward()
+    optimizer.step()
+    return loss.item()
+
+
+# 测试模型
+def test():
+    model.eval()
+    out = model(data.x, data.edge_index)
+    pred = out.argmax(dim=1)
+    test_correct = pred[data.test_mask] == data.y[data.test_mask]
+    test_acc = int(test_correct.sum()) / int(data.test_mask.sum())
+    return test_acc
+
+
+# 训练和测试
+for epoch in range(200):
+    loss = train()
+    if (epoch + 1) % 10 == 0:
+        test_acc = test()
+        print(f'Epoch: {epoch+1}, Loss: {loss:.4f}, Test Acc: {test_acc:.4f}')
+```
+
+
+以上代码定义了一个简单的图卷积网络模型，使用交叉熵损失函数和 Adam 优化器，对 Cora 数据集进行节点分类任务的训练和测试。
